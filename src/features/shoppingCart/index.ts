@@ -1,41 +1,16 @@
-import { CartItem, ShoppingCart } from "./ShoppingCart";
+import { ShoppingCart } from "./ShoppingCart";
 import { DefaultPricingStrategy } from "./PricingStrategy";
 import { ConsolePaymentProcessor } from "./PaymentProcessor";
 
-class ShoppingCartService {
-  constructor(
-    private cart: ShoppingCart,
-    private pricingStrategy: DefaultPricingStrategy,
-    private paymentProcessor: ConsolePaymentProcessor
-  ) {}
+export function runShoppingCart(): void {
+  const cart = new ShoppingCart();
+  const pricingStrategy = new DefaultPricingStrategy();
+  const paymentProcessor = new ConsolePaymentProcessor();
 
-  calculateTotal(): number {
-    const items = this.cart.getItems();
-    const total = this.pricingStrategy.calculateTotal(items);
-    console.log("Total calculated:", total);
-    return total;
-  }
+  cart.addItem({ name: "Laptop", price: 1000, quantity: 1 });
+  cart.addItem({ name: "Mouse", price: 50, quantity: 2 });
 
-  checkout(): void {
-    const total = this.calculateTotal();
-    this.paymentProcessor.processPayment(total);
-  }
+  console.log("Running shopping cart feature:");
+  const total = pricingStrategy.calculateTotal(cart.getItems());
+  paymentProcessor.processPayment(total);
 }
-
-// Crear las dependencias
-const cart = new ShoppingCart();
-const pricingStrategy = new DefaultPricingStrategy();
-const paymentProcessor = new ConsolePaymentProcessor();
-const cartService = new ShoppingCartService(
-  cart,
-  pricingStrategy,
-  paymentProcessor
-);
-
-// Add articles to cart
-cart.addItem(new CartItem("Laptop", 1000, 1));
-cart.addItem(new CartItem("Mouse", 50, 2));
-
-// Checkout and total calculation
-cartService.calculateTotal();
-cartService.checkout();
