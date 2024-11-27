@@ -22,7 +22,7 @@ This application is written in TypeScript and contains multiple features organiz
 1. Clone the repository or copy the source code into a directory on your machine.
 2. Navigate to the project root directory:
    ```bash
-   cd ecommerce-app
+   cd ecommerce-lab
    ```
 3. Install the required dependencies:
    ```bash
