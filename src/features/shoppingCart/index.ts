@@ -32,10 +32,10 @@ const cartService = new ShoppingCartService(
   paymentProcessor
 );
 
-// Agregar artículos al carrito
+// Add articles to cart
 cart.addItem(new CartItem("Laptop", 1000, 1));
 cart.addItem(new CartItem("Mouse", 50, 2));
 
-// Calcular el total y realizar el pago
+// Checkout and total calculation
 cartService.calculateTotal();
 cartService.checkout();
